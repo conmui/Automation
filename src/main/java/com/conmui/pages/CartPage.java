@@ -13,6 +13,7 @@ public class CartPage extends BasePage {
     private final List<WebElement> cartProducts = driver.findElements(By.xpath("//tr[contains(@id, 'product-')]"));
     private final By proceedToCheckout = By.cssSelector(".check_out");
     private final By registerLogin = By.cssSelector(".modal-body a[href='/login']");
+    private final By signupLoginButton = By.linkText("Signup / Login");
 
     public CartPage(WebDriver driver) {
         super(driver);
@@ -62,5 +63,35 @@ public class CartPage extends BasePage {
         } catch (NoSuchElementException e) {
             return true;
         }
+    }
+
+    public List<WebElement> getCartProducts() {
+        return driver.findElements(By.xpath("//tr[contains(@id, 'product-')]"));
+    }
+
+    public String getCartProductName(WebElement product) {
+        return getElementText(product.findElement(By.cssSelector(".cart_description > h4")));
+    }
+
+    public int getCartProductPrice(WebElement product) {
+        return extractNumValue(product.findElement(By.cssSelector(".cart_price > p")));
+    }
+
+    public int getCartProductId(WebElement product) {
+        WebElement element = product.findElement(By.cssSelector(".cart_delete > a"));
+        return Integer.parseInt(element.getDomAttribute("data-product-id"));
+    }
+
+    public int getCartProductQuantity(WebElement product) {
+        return extractNumValue(product.findElement(By.cssSelector(".cart_quantity > button")));
+    }
+
+    public int getCartProductTotal(WebElement product) {
+        return extractNumValue(product.findElement(By.cssSelector(".cart_total_price")));
+    }
+
+    public SignupLoginPage navigateToSignupLoginPage() {
+        clickButton(signupLoginButton);
+        return new SignupLoginPage(driver);
     }
 }

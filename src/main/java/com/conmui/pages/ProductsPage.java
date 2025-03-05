@@ -1,4 +1,5 @@
 package com.conmui.pages;
+
 import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -45,10 +46,6 @@ public class ProductsPage extends BasePage {
         return new ProductDetailsPage(driver);
     }
 
-    public boolean verifySearchResult(WebElement product, String searchText) {
-        return product.getText().toLowerCase().contains(searchText);
-    }
-
     public void addProductToCart(int productId) {
         WebElement product = driver.findElement(By.xpath("(//div[contains(@class, 'productinfo')])[" + productId + "]//p"));
         Actions actions = new Actions(driver);
@@ -56,6 +53,7 @@ public class ProductsPage extends BasePage {
         clickButton(By.cssSelector("a[data-product-id='" + productId + "']"));
     }
 
+    //Modal Popup
     public void clickContinueShopping() {
         clickModalButton(continueShopping);
     }
@@ -63,5 +61,34 @@ public class ProductsPage extends BasePage {
     public CartPage clickViewCart() {
         clickModalButton(viewCart);
         return new CartPage(driver);
+    }
+
+    //Search Results Products
+    public boolean verifySearchResult(WebElement product, String searchText) {
+        String productName = getElementText(product.findElement(By.cssSelector(".productinfo > p")));
+        return productName.contains(searchText);
+    }
+
+    public List<WebElement> getSearchResults() {
+        return driver.findElements(By.cssSelector(".single-products"));
+    }
+
+    public void addSearchResultToCart(WebElement product) {
+        Actions actions = new Actions(driver);
+        actions.moveToElement(product).perform();
+        clickButton(product.findElement(By.cssSelector(".overlay-content > .add-to-cart")));
+    }
+
+    public String getProductName(WebElement product) {
+        return getElementText(product.findElement(By.cssSelector(".productinfo > p")));
+    }
+
+    public int getProductPrice(WebElement product) {
+        return extractNumValue(product.findElement(By.cssSelector(".productinfo > h2")));
+    }
+
+    public int getProductId(WebElement product) {
+        WebElement element = product.findElement(By.cssSelector(".productinfo > a"));
+        return Integer.parseInt(element.getDomAttribute("data-product-id"));
     }
 }

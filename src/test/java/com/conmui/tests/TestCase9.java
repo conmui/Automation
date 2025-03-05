@@ -1,9 +1,8 @@
 package com.conmui.tests;
 
+import java.util.List;
 import com.conmui.pages.HomePage;
 import com.conmui.pages.ProductsPage;
-import java.util.List;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -16,7 +15,7 @@ public class TestCase9 extends BaseTest {
     @Test
     public void searchProductTest() {
         HomePage homePage = new HomePage(driver);
-        String searchText = "jeans";
+        String searchText = "Jeans";
 
 //        3. Verify that home page is visible successfully
         assertEquals("https://automationexercise.com/", homePage.getUrl());
@@ -37,7 +36,9 @@ public class TestCase9 extends BaseTest {
         assertEquals("SEARCHED PRODUCTS", productsPage.getHeaderText());
 
 //        8. Verify all the products related to search are visible
-        List<WebElement> searchResults = driver.findElements(By.cssSelector(".productinfo > p"));
+//        List<WebElement> searchResults = driver.findElements(By.cssSelector(".productinfo > p"));
+        List<WebElement> searchResults = productsPage.getSearchResults();
+
         for (WebElement product : searchResults) {
             assertTrue(productsPage.verifySearchResult(product, searchText));
         }

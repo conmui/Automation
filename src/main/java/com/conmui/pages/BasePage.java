@@ -1,4 +1,5 @@
 package com.conmui.pages;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -36,9 +37,17 @@ public class BasePage {
         return element.getText();
     }
 
+    public String getElementText(WebElement locator) {
+        return locator.getText();
+    }
+
     public void clickButton(By locator) {
         WebElement button = driver.findElement(locator);
         button.click();
+    }
+
+    public void clickButton(WebElement locator) {
+        locator.click();
     }
 
     public void fillInput(By locator, String fieldValue) {
@@ -101,6 +110,11 @@ public class BasePage {
 
     public int extractNumValue(By locator) {
         String text = driver.findElement(locator).getText();
+        return Integer.parseInt(text.replaceAll("\\D+", ""));
+    }
+
+    public int extractNumValue(WebElement locator) {
+        String text = locator.getText();
         return Integer.parseInt(text.replaceAll("\\D+", ""));
     }
 }
