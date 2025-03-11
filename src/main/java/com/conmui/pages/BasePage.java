@@ -43,12 +43,16 @@ public class BasePage {
     }
 
     public void clickButton(By locator) {
-        WebElement button = driver.findElement(locator);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement button = wait.until(ExpectedConditions.elementToBeClickable(locator));
 
         button.click();
     }
 
     public void clickButton(WebElement locator) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(locator));
+
         locator.click();
     }
 
