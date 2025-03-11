@@ -19,6 +19,7 @@ public class BasePage {
     private final By deleteAccountLink = By.linkText("Delete Account");
     private final By testCasesLink = By.linkText("Test Cases");
     private final By contactUsLink = By.linkText("Contact us");
+    private final By scrollUp = By.id("scrollUp");
     private final By footerHeader = By.cssSelector(".footer-widget h2");
     private final By successAlert = By.id("success-subscribe");
 
@@ -153,11 +154,22 @@ public class BasePage {
     }
 
     //Footer
-    public void scrollToFooter() {
-        WebElement footer = driver.findElement(By.tagName("footer"));
+    public void scrollToBottom() {
+        WebElement bottom = driver.findElement(By.tagName("footer"));
 
-        new Actions(driver).scrollToElement(footer).perform();
+        new Actions(driver).scrollToElement(bottom).perform();
     }
+
+    public void scrollToTop() {
+        WebElement bottom = driver.findElement(By.className("logo"));
+
+        new Actions(driver).scrollToElement(bottom).perform();
+    }
+
+    public void clickArrowToScrollToTop() {
+        clickButton(scrollUp);
+    }
+
 
     public boolean isFooterHeaderVisible() {
         return isElementVisible(footerHeader);

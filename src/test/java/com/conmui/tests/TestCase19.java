@@ -22,7 +22,7 @@ public class TestCase19 extends BaseTest {
 
 //        4. Verify that Brands are visible on left sidebar
         assertTrue(homePage.isBrandHeaderVisible());
-        assertEquals("BRANDS", homePage.getBrandHeaderText());
+        assertEquals(HOME_BRANDS_HEADER, homePage.getBrandHeaderText());
         assertTrue(homePage.isBrandSectionVisible());
         assertTrue(homePage.isBrandSectionFilled());
 

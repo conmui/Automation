@@ -19,11 +19,14 @@ public class TestCase24 extends BaseTest {
         Product product1 = new Product(1, "Blue Top", 500, 1);
         Product product2 = new Product(2, "Men Tshirt", 400, 1);
         User user = new User("dayman", "charliekelly@email.com", "Mr", "itsalwayssunny", "9", "February", "1976", "Charlie", "Kelly", "Paddy's Pub", "544 Mateo Street", "", "United States", "California", "Los Angeles", "90013", "2136265731", "1111222211112222", "178", "10", "2030");
-        int expectedCartTotal = product1.getTotal() + product2.getTotal();
+
+        int cartTotal = product1.getTotal() + product2.getTotal();
         String comment = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+        String loggedInAsText = "Logged in as " + user.getUsername();
+        String successMessage = "Your order has been placed successfully!";
 
 //        3. Verify that home page is visible successfully
-        verifyPageVisible(EXPECTED_HOME_URL, EXPECTED_HOME_TITLE);
+        verifyPageVisible(HOME_URL, HOME_TITLE);
 
 //        4. Add products to cart
         homePage.addProductToCart(product1.getId());
@@ -34,7 +37,7 @@ public class TestCase24 extends BaseTest {
         CartPage cartPage = homePage.clickViewCart();
 
 //        6. Verify that cart page is displayed
-        verifyPageVisible(EXPECTED_CART_URL, EXPECTED_CART_TITLE);
+        verifyPageVisible(CART_URL, CART_TITLE);
 
 //        7. Click Proceed To Checkout
         cartPage.clickProceedToCheckout();
@@ -52,12 +55,12 @@ public class TestCase24 extends BaseTest {
 
 //        10. Verify 'ACCOUNT CREATED!' and click 'Continue' button
         assertTrue(accountCreatedPage.isHeaderVisible());
-        assertEquals("ACCOUNT CREATED!", accountCreatedPage.getHeaderText());
+        assertEquals(ACCOUNTCREATED_HEADER, accountCreatedPage.getHeaderText());
         homePage = accountCreatedPage.clickContinue();
 
 //        11. Verify ' Logged in as username' at top
         assertTrue(homePage.isLoggedInVisible());
-        assertEquals("Logged in as " + user.getUsername(), homePage.getLoggedInText());
+        assertEquals(loggedInAsText, homePage.getLoggedInText());
 
 //        12.Click 'Cart' button
         cartPage = homePage.navigateToCartPage();
@@ -72,7 +75,7 @@ public class TestCase24 extends BaseTest {
         verifyProductDetails(product1, checkoutPage);
         verifyProductDetails(product2, checkoutPage);
 
-        assertEquals(expectedCartTotal, checkoutPage.getCartTotal());
+        assertEquals(cartTotal, checkoutPage.getCartTotal());
 
 //        15. Enter description in comment text area and click 'Place Order'
         checkoutPage.fillComment(comment);
@@ -87,7 +90,7 @@ public class TestCase24 extends BaseTest {
 
 //        18. Verify success message 'Your order has been placed successfully!'
         assertTrue(paymentPage.isSuccessMessageVisible());
-        assertEquals("Your order has been placed successfully!", paymentPage.getSuccessMessageText());
+        assertEquals(successMessage, paymentPage.getSuccessMessageText());
 
 //        19. Click 'Download Invoice' button and verify invoice is downloaded successfully.
         orderPlacedPage.clickDownloadInvoice();
@@ -102,12 +105,12 @@ public class TestCase24 extends BaseTest {
 
 //        22. Verify 'ACCOUNT DELETED!' and click 'Continue' button
         assertTrue(accountDeletedPage.isHeaderVisible());
-        assertEquals("ACCOUNT DELETED!", accountDeletedPage.getHeaderText());
+        assertEquals(ACCOUNTDELETED_HEADER, accountDeletedPage.getHeaderText());
     }
 
     public void verifyInvoiceDownloaded() throws InterruptedException {
-        String filePath = "";
-        File downloadedInvoice = new File(filePath);
+        String downloadFilePath = "";
+        File downloadedInvoice = new File(downloadFilePath);
 
         while (!downloadedInvoice.exists()) {
             Thread.sleep(3000);

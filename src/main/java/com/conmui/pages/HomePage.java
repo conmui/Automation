@@ -16,6 +16,7 @@ public class HomePage extends BasePage {
     private final By brandsHeader = By.cssSelector(".brands_products > h2");
     private final By brandsSection = By.cssSelector(".brands_products");
     private final By recommendedItemsHeader = By.cssSelector(".recommended_items > h2");
+    private final By mainHeader = By.cssSelector(".carousel-inner h2");
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -27,6 +28,14 @@ public class HomePage extends BasePage {
 
     public String getLoggedInText() {
         return getElementText(loggedInAs);
+    }
+
+    public boolean isMainHeaderVisible() {
+        return isElementVisible(mainHeader);
+    }
+
+    public String getMainHeaderText() {
+        return getElementText(mainHeader);
     }
 
     //'All Products' Section
@@ -108,12 +117,6 @@ public class HomePage extends BasePage {
     }
 
     //'RECOMMENDED ITEMS' Section
-    public void scrollToBottom() {
-        WebElement footer = driver.findElement(By.tagName("footer"));
-
-        new Actions(driver).scrollToElement(footer).perform();
-    }
-
     public boolean isRecommendedItemsHeaderVisible() {
         return isElementVisible(recommendedItemsHeader);
     }

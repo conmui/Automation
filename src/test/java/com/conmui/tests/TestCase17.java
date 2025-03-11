@@ -17,7 +17,7 @@ public class TestCase17 extends  BaseTest {
         Product product2 = new Product(2, "Men Tshirt", 400, 1);
 
 //        3. Verify that home page is visible successfully
-        verifyPageVisible(EXPECTED_HOME_URL, EXPECTED_HOME_TITLE);
+        verifyPageVisible(HOME_URL, HOME_TITLE);
 
 //        4. Add products to cart
         homePage.addProductToCart(product1.getId());
@@ -29,7 +29,7 @@ public class TestCase17 extends  BaseTest {
         CartPage cartPage = homePage.clickViewCart();
 
 //        6. Verify that cart page is displayed
-        verifyPageVisible(EXPECTED_CART_URL, EXPECTED_CART_TITLE);
+        verifyPageVisible(CART_URL, CART_TITLE);
 
 //        7. Click 'X' button corresponding to particular product
         cartPage.removeProduct(product1.getId());

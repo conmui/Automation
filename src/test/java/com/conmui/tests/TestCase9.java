@@ -18,20 +18,20 @@ public class TestCase9 extends BaseTest {
         String searchText = "Jeans";
 
 //        3. Verify that home page is visible successfully
-        verifyPageVisible(EXPECTED_HOME_URL, EXPECTED_HOME_TITLE);
+        verifyPageVisible(HOME_URL, HOME_TITLE);
 
 //        4. Click on 'Products' button
         ProductsPage productsPage = homePage.navigateToProductsPage();
 
 //        5. Verify user is navigated to ALL PRODUCTS page successfully
-        verifyPageVisible(EXPECTED_PRODUCTS_URL, EXPECTED_PRODUCTS_TITLE);
+        verifyPageVisible(PRODUCTS_URL, PRODUCTS_TITLE);
 
 //        6. Enter product name in search input and click search button
         productsPage.searchForProducts(searchText);
 
 //        7. Verify 'SEARCHED PRODUCTS' is visible
         assertTrue(productsPage.isHeaderVisible());
-        assertEquals("SEARCHED PRODUCTS", productsPage.getHeaderText());
+        assertEquals(PRODUCTS_SEARCHED_HEADER, productsPage.getHeaderText());
 
 //        8. Verify all the products related to search are visible
         verifyProductsRelatedToSearch(productsPage, searchText);

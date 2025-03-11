@@ -13,12 +13,12 @@ public class TestCase7 extends BaseTest {
         HomePage homePage = new HomePage(driver);
 
 //        3. Verify that home page is visible successfully
-        verifyPageVisible(EXPECTED_HOME_URL, EXPECTED_HOME_TITLE);
+        verifyPageVisible(HOME_URL, HOME_TITLE);
 
 //        4. Click on 'Test Cases' button
         TestCasesPage testCasesPage = homePage.navigateToTestCasesPage();
 
 //        5. Verify user is navigated to test cases page successfully
-        verifyPageVisible(EXPECTED_TESTCASES_URL, EXPECTED_TESTCASES_TITLE);
+        verifyPageVisible(TESTCASES_URL, TESTCASES_TITLE);
     }
 }

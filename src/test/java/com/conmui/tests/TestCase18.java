@@ -13,11 +13,9 @@ public class TestCase18 extends BaseTest {
     @Test
     public void verifyCategoryProductsListing() {
         HomePage homePage = new HomePage(driver);
-
         String category1Name = "Women";
         int subcategory1Id = 1;
         String subcategory1Name = "Dress";
-
         String category2Name = "Men";
         int subcategory2Id = 3;
         String subcategory2Name = "Tshirts";
@@ -25,7 +23,7 @@ public class TestCase18 extends BaseTest {
 //        3. Verify that categories are visible on left sidebar
         assertTrue(homePage.isCategorySectionVisible());
         assertTrue(homePage.isCategoryHeaderVisible());
-        assertEquals("CATEGORY", homePage.getCategoryHeaderText());
+        assertEquals(HOME_CATEGORY_HEADER, homePage.getCategoryHeaderText());
         assertTrue(homePage.isCategorySectionFilled());
 
 //        4. Click on 'Women' category

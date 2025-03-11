@@ -20,24 +20,24 @@ public class TestCase20 extends BaseTest {
     @Test
     public void verifySearchProductsAndAddToCartAfterLogin() {
         HomePage homePage = new HomePage(driver);
-        String searchText = "Jeans";
         User user = new User("dayman", "charliekelly@email.com", "Mr", "itsalwayssunny", "9", "February", "1976", "Charlie", "Kelly", "Paddy's Pub", "544 Mateo Street", "", "United States", "California", "Los Angeles", "90013", "2136265731", "1111222211112222", "178", "10", "2030");
+        String searchText = "Jeans";
 
 //        3. Click on 'Products' button
         ProductsPage productsPage = homePage.navigateToProductsPage();
 
 //        4. Verify user is navigated to ALL PRODUCTS page successfully
-        verifyPageVisible(EXPECTED_PRODUCTS_URL, EXPECTED_PRODUCTS_TITLE);
+        verifyPageVisible(PRODUCTS_URL, PRODUCTS_TITLE);
 
         assertTrue(productsPage.isHeaderVisible());
-        assertEquals("ALL PRODUCTS", productsPage.getHeaderText());
+        assertEquals(PRODUCTS_HEADER, productsPage.getHeaderText());
 
 //        5. Enter product name in search input and click search button
         productsPage.searchForProducts(searchText);
 
 //        6. Verify 'SEARCHED PRODUCTS' is visible
         assertTrue(productsPage.isHeaderVisible());
-        assertEquals("SEARCHED PRODUCTS", productsPage.getHeaderText());
+        assertEquals(PRODUCTS_SEARCHED_HEADER, productsPage.getHeaderText());
 
 //        7. Verify all the products related to search are visible
         List<WebElement> searchResults = productsPage.getSearchResults();

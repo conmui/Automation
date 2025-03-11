@@ -23,7 +23,7 @@ public class TestCase22 extends BaseTest {
 
 //        4. Verify 'RECOMMENDED ITEMS' are visible
         assertTrue(homePage.isRecommendedItemsHeaderVisible());
-        assertEquals("RECOMMENDED ITEMS", homePage.getRecommendedItemsHeaderText());
+        assertEquals(HOME_RECOMMENDEDITEMS_HEADER, homePage.getRecommendedItemsHeaderText());
 
 //        5. Click on 'Add To Cart' on Recommended product
         homePage.addToCartRecommendedItem(productId);

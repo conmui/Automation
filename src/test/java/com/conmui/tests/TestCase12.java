@@ -18,7 +18,7 @@ public class TestCase12 extends BaseTest {
         Product product2 = new Product(2, "Men Tshirt", 400, 1);
 
 //        3. Verify that home page is visible successfully
-        verifyPageVisible(EXPECTED_HOME_URL, EXPECTED_HOME_TITLE);
+        verifyPageVisible(HOME_URL, HOME_TITLE);
 
 //        4. Click 'Products' button
         ProductsPage productsPage = homePage.navigateToProductsPage();

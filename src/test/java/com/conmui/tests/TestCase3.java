@@ -16,16 +16,17 @@ public class TestCase3 extends BaseTest {
         HomePage homePage = new HomePage(driver);
         User user = new User("dayman", "charliekelly@email.com", "Mr", "itsalwayssunny", "9", "February", "1976", "Charlie", "Kelly", "Paddy's Pub", "544 Mateo Street", "", "United States", "California", "Los Angeles", "90013", "2136265731", "1111222211112222", "178", "10", "2030");
         User userIncorrect = new User("nightman", "jackkelly@email.com", "Mr", "itsalwayssunny", "9", "February", "1976", "Charlie", "Kelly", "Paddy's Pub", "544 Mateo Street", "", "United States", "California", "Los Angeles", "90013", "2136265731", "1111222211112222", "178", "10", "2030");
+        String errorMessage = "Your email or password is incorrect!";
 
 //        3. Verify that home page is visible successfully
-        verifyPageVisible(EXPECTED_HOME_URL, EXPECTED_HOME_TITLE);
+        verifyPageVisible(HOME_URL, HOME_TITLE);
 
 //        4. Click on 'Signup / Login' button
         SignupLoginPage signupLoginPage = homePage.navigateToSignupLoginPage();
 
 //        5. Verify 'Login to your account' is visible
         assertTrue(signupLoginPage.isLoginHeaderVisible());
-        assertEquals("Login to your account", signupLoginPage.getLoginHeaderText());
+        assertEquals(SIGNUPLOGIN_LOGIN_HEADER, signupLoginPage.getLoginHeaderText());
 
 //        6. Enter incorrect email address and password
         signupLoginPage.fillLogin(userIncorrect.getEmail(), userIncorrect.getPassword());
@@ -37,6 +38,6 @@ public class TestCase3 extends BaseTest {
 
 //        8. Verify error 'Your email or password is incorrect!' is visible
         assertTrue(signupLoginPage.isLoginErrorMessageVisible());
-        assertEquals("Your email or password is incorrect!", signupLoginPage.getLoginErrorMessageText());
+        assertEquals(errorMessage, signupLoginPage.getLoginErrorMessageText());
     }
 }

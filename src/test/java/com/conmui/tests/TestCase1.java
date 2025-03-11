@@ -14,16 +14,17 @@ public class TestCase1 extends BaseTest {
     public void registerUser() {
         HomePage homePage = new HomePage(driver);
         User user = new User("dayman", "charliekelly@email.com", "Mr", "itsalwayssunny", "9", "February", "1976", "Charlie", "Kelly", "Paddy's Pub", "544 Mateo Street", "", "United States", "California", "Los Angeles", "90013", "2136265731", "1111222211112222", "178", "10", "2030");
+        String loggedInAsText = "Logged in as " + user.getUsername();
 
 //        3. Verify that home page is visible successfully
-        verifyPageVisible(EXPECTED_HOME_URL, EXPECTED_HOME_TITLE);
+        verifyPageVisible(HOME_URL, HOME_TITLE);
 
 //        4. Click on 'Signup / Login' button
         SignupLoginPage signupLoginPage = homePage.navigateToSignupLoginPage();
 
 //        5. Verify 'New User Signup!' is visible
         assertTrue(signupLoginPage.isSignupHeaderVisible());
-        assertEquals("New User Signup!", signupLoginPage.getSignupHeaderText());
+        assertEquals(SIGNUPLOGIN_SIGNUP_HEADER, signupLoginPage.getSignupHeaderText());
 
 //        6. Enter name and email address
         signupLoginPage.fillSignup(user.getUsername(), user.getEmail());
@@ -33,7 +34,7 @@ public class TestCase1 extends BaseTest {
 
 //        8. Verify that 'ENTER ACCOUNT INFORMATION' is visible
         assertTrue(signupPage.isHeaderVisible());
-        assertEquals("ENTER ACCOUNT INFORMATION", signupPage.getHeaderText());
+        assertEquals(SIGNUP_HEADER, signupPage.getHeaderText());
 
 //        9. Fill details: Title, Name, Email, Password, Date of birth
         signupPage.fillAccountInformation(user.getTitle(), user.getUsername(), user.getPassword(), user.getDay(), user.getMonth(), user.getYear());
@@ -52,21 +53,21 @@ public class TestCase1 extends BaseTest {
 
 //        14. Verify that 'ACCOUNT CREATED!' is visible
         assertTrue(accountCreatedPage.isHeaderVisible());
-        assertEquals("ACCOUNT CREATED!", accountCreatedPage.getHeaderText());
+        assertEquals(ACCOUNTCREATED_HEADER, accountCreatedPage.getHeaderText());
 
 //        15. Click 'Continue' button
         homePage = accountCreatedPage.clickContinue();
 
 //        16. Verify that 'Logged in as username' is visible
         assertTrue(homePage.isLoggedInVisible());
-        assertEquals("Logged in as " + user.getUsername(), homePage.getLoggedInText());
+        assertEquals(loggedInAsText, homePage.getLoggedInText());
 
 //        17. Click 'Delete Account' button
         AccountDeletedPage accountDeletedPage = homePage.clickDeleteAccount();
 
 //        18. Verify that 'ACCOUNT DELETED!' is visible and click 'Continue' button
         assertTrue(accountDeletedPage.isHeaderVisible());
-        assertEquals("ACCOUNT DELETED!", accountDeletedPage.getHeaderText());
+        assertEquals(ACCOUNTDELETED_HEADER, accountDeletedPage.getHeaderText());
 
         accountDeletedPage.clickContinue();
     }

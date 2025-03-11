@@ -18,13 +18,13 @@ public class TestCase13 extends BaseTest {
         String expectedProductDetailsURL = "https://automationexercise.com/product_details/" + product.getId();
 
 //        3. Verify that home page is visible successfully
-        verifyPageVisible(EXPECTED_HOME_URL, EXPECTED_HOME_TITLE);
+        verifyPageVisible(HOME_URL, HOME_TITLE);
 
 //        4. Click 'View Product' for any product on home page
         ProductDetailsPage productDetailsPage = homePage.viewProduct(product.getId());
 
 //        5. Verify product detail is opened
-        verifyPageVisible(expectedProductDetailsURL, EXPECTED_PRODUCTDETAILS_TITLE);
+        verifyPageVisible(expectedProductDetailsURL, PRODUCTDETAILS_TITLE);
 
 //        6. Increase quantity to 4
         productDetailsPage.increaseQuantity(4);
